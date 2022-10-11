@@ -443,15 +443,12 @@ inline const uint8_t* CxPlatTlsAlpnFindInList(_In_ uint16_t AlpnListLength,
                                               _In_ uint8_t FindAlpnLength,
                                               _In_reads_(FindAlpnLength)
                                                   const uint8_t* FindAlpn) {
-  std::cout << "[CxPlatTlsAlpnFindInList] Target: "
-            << std::string((const char*)FindAlpn, FindAlpnLength) << std::endl;
+  printf("[CxPlatTlsAlpnFindInList] Target: %.*s\n", FindAlpnLength,
+         (const char*)FindAlpn);
   while (AlpnListLength != 0) {
     CXPLAT_DBG_ASSERT(AlpnList[0] + 1 <= AlpnListLength);
-
-    std::cout << "[CxPlatTlsAlpnFindInList] Candidate: "
-              << std::string((const char)(AlpnList + 1), FindAlpnLength)
-              << std::endl;
-
+    printf("[CxPlatTlsAlpnFindInList] Target: %.*s, specified length: %d\n",
+           FindAlpnLength, (const char*)(AlpnList + 1), AlpnList[0]);
     if (AlpnList[0] == FindAlpnLength &&
         memcmp(AlpnList + 1, FindAlpn, FindAlpnLength) == 0) {
       return AlpnList;
