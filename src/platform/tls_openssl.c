@@ -231,9 +231,6 @@ static int CxPlatTlsCertificateVerifyCallback(X509_STORE_CTX* x509_ctx,
 
   TlsContext->PeerCertReceived = (Cert != NULL);
 
-  printf("[CxPlatTlsCertificateVerifyCallback] Flags: %d\n",
-         TlsContext->SecConfig->Flags);
-
   if ((TlsContext->SecConfig->Flags & QUIC_CREDENTIAL_FLAG_CLIENT ||
        IsDeferredValidationOrClientAuth) &&
       !(TlsContext->SecConfig->Flags &
